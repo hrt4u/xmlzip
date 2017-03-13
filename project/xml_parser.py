@@ -51,10 +51,8 @@ class XmlParser(object):
         results2 = [['id', 'object_name']]
         pool = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
         results = list(zip(*pool.map(self.zip_parse, self.zip_archives)))
-        print(len(results))
         results1 = list(itertools.chain.from_iterable(results[0]))
         results2 = list(itertools.chain.from_iterable(results[1]))
-        print(len(results1), len(results2))
         pool.close()
         pool.join()
         self.write_csv_file('results/results1.csv', results1)
